@@ -25,44 +25,46 @@ app.use(morgan('combined'));
 
 // start the in-memory MongoDB instance
 startDatabase().then(async () =>{
-    await insertFd({title:"Garmin ForeRunner 235", api:"Aikido Monkey"});
-    await insertFd({title:"Garmin ForeRunner 935", api:"Biker Monkey"});
-    await insertFd({title:"FitBit", api:"FitBit Web API"});
-    await insertFd({title:"Apple watch", api:"Health Records"});
-})
-
+    await insertFd({email:"a@aa.com", title:"Garmin ForeRunner 235", api:"Aikido Monkey"});
+    // await insertFd({email:"b@bb.com", title:"Garmin ForeRunner 935", api:"Biker Monkey"});
+    // await insertFd({email:"c@cc.com", title:"FitBit", api:"FitBit Web API"});
+    // await insertFd({email:"d@dd.com", title:"Apple watch", api:"Health Records"});
+});
 
 //ROUTES
-//GET
+//GET 
 app.get("/", async (req, res) => {
     res.send(await getFds());
 });
 
+//byID 
 app.get("/tracker", async (req, res) => {
-    const query = req.query._id;
-    const result = await getOne(query);
+    const result = await getOne(req.query._id);
     console.log(result);
     res.send(result);
 })
+//byEmail?
 
-//POST
+//POST 
 app.post('/', async (req, res) => {
-    const newAd = req.body;
-    await insertFd(newFd);
+    console.log(req.body);
+    await insertFd(req.body);
     res.send({ message: 'Fitness device added'});
 });
 
-//DELETE
+//DELETE 
 app.delete('/:id', async (req, res) => {
+    console.log(req.route);       
     await deleteFd(req.params.id);
-    console.log(res.body);
     res.send({ message: 'Fitness device removed'});
 });
 
-//PUT
+//PUT 
 app.put('/:id', async (req, res) => {
     const update = req.body;
     await updateFd(req.params.id, update);
+    console.log(update);
+    console.log(req.route);  
     res.send({ message: 'Fitness device updated'});
 
 });

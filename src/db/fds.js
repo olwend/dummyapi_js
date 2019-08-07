@@ -11,7 +11,14 @@ async function insertFd(fd) {
 
 async function getFds() {
     const database = await getDatabase();
-    return await database.collection(collectionName).find({}).toArray();
+    return await database.collection(collectionName).find({}).toArray();   
+}
+
+async function getIDs() {
+    const database = await getDatabase();
+    let device = await database.collection(collectionName).findOne({email:"a@aa.com"}).ObjectID;
+    console.log(device);  
+    return device;
 }
 
 async function deleteFd(id) {
@@ -31,14 +38,15 @@ async function getOne(id) {
 async function updateFd(id, fd) {
     const database = await getDatabase();
     delete fd._id;
-    await database.collection(collectionName).update(
+    await database.collection(collectionName).updateOne(
         {_id: new ObjectID(id), },
         {
             $set: {
-                ...ad,
+                ...fd,
             },
         },
     );
+
 }
 
 module.exports = {
@@ -46,5 +54,6 @@ module.exports = {
     getFds,
     getOne,
     deleteFd,
-    updateFd
+    updateFd,
+    getIDs
 };
