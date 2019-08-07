@@ -1,6 +1,9 @@
 const request = require('request');
 let apiUrlRoot = 'http://localhost:3001'; 
 
+// function to get _ID
+let deviceID;
+
 // GET - In memory mongo populated initial data
 describe("Basic routes work", () => {
     test("gets seeded data", async done => {
@@ -13,6 +16,7 @@ describe("Basic routes work", () => {
         });
     });
 
+    console.log('Test faff' + body);
 
 // POST new record
     test("can post new device", async done => {
