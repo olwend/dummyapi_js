@@ -12,7 +12,7 @@ describe("Basic routes work", () => {
         done();
         });
     });
-});
+
 
 // POST new record
     test("can post new device", async done => {
@@ -39,6 +39,7 @@ describe("Basic routes work", () => {
                 };
             });
         });
+    });
         
 // Put - update existing record
 
