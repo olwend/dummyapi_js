@@ -2,7 +2,9 @@ const request = require('request');
 let apiUrlRoot = 'http://localhost:3001'; 
 
 // function to get _ID
+
 let deviceID;
+
 
 // GET - In memory mongo populated initial data
 describe("Basic routes work", () => {
@@ -12,11 +14,12 @@ describe("Basic routes work", () => {
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
             console.log('body:', body); // Print '/'api data
         expect(body).toContain('_id');
+        let deviceList =  body;
+        console.log(typeof deviceList);
         done();
         });
     });
 
-    console.log('Test faff' + body);
 
 // POST new record
     test("can post new device", async done => {
@@ -24,9 +27,9 @@ describe("Basic routes work", () => {
         { json:{"email":"t@tt.com","title":"Testing TestRunner 235","api":"Aikido Testkey"}},
         function (error, response, body) {
                 if (!error && response.statusCode == 200) {
-            console.log('body:', body); // Print '/'api data
+            console.log('body:', body); // Print message
                 }
-        expect(response.statusCode).toBe(200);
+            expect(response.body).toEqual({"message": "Fitness device added"});   
         done();
         });
     });
@@ -34,7 +37,7 @@ describe("Basic routes work", () => {
 
 // GET - verify addition is one of the body items
 
-    test("can get added device", async done => {
+    test("can GET added device", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(body);
