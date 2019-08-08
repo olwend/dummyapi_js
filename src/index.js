@@ -64,7 +64,6 @@ app.put('/:id', async (req, res) => {
     const update = req.body;
     await updateFd(req.params.id, update);
     console.log(update);
-    console.log(req.route);  
     res.send({ message: 'Fitness device updated'});
 
 });

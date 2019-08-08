@@ -14,15 +14,13 @@ describe("Basic routes work", () => {
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
             console.log('body:', body); // Print '/'api data
         expect(body).toContain('_id');
-        let deviceList =  body;
-        console.log(typeof deviceList);
         done();
         });
     });
 
 
 // POST new record
-    test("can post new device", async done => {
+    test("can POST new device", async done => {
         request.post(`${apiUrlRoot}`,
         { json:{"email":"t@tt.com","title":"Testing TestRunner 235","api":"Aikido Testkey"}},
         function (error, response, body) {
@@ -40,14 +38,40 @@ describe("Basic routes work", () => {
     test("can GET added device", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log(body);
                 expect(body).toContain('Testing');
                 done();
                 };
             });
         });
-    });
-        
-// Put - update existing record
 
-// Delete - remove record
+        
+// Put - update existing record using id
+    test("can PUT update new field to device", async done => {
+        request.get(`${apiUrlRoot}`, function (error, response, body) {
+            let deviceID =  body.slice(9,33);
+            console.log(`${apiUrlRoot}/${deviceID}`);
+            request.put(`${apiUrlRoot}/${deviceID}`,        
+                { json:{"price": 125.5}},
+                function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log('body:', body); // Print message
+                    expect(body).toEqual({ message: 'Fitness device updated' })
+                    };
+                done();  
+                });      
+        
+
+        });
+        
+        // request.put(`${apiUrlRoot}/${deviceID}`,        
+        //     { json:{"price": 125.5}},
+        //     function (error, response, body) {
+        //     if (!error && response.statusCode == 200) {
+        //         console.log('body:', body); // Print message
+        //         }; 
+        //     });          
+            
+        });
+});  
+// Delete - remove records
+  
