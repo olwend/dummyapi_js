@@ -38,40 +38,43 @@ describe("Basic routes work", () => {
     test("can GET added device", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
+                console.log('body:', body); // Print message
                 expect(body).toContain('Testing');
                 done();
                 };
             });
         });
-
         
-// Put - update existing record using id
+// PUT - update existing record using id
     test("can PUT update new field to device", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             let deviceID =  body.slice(9,33);
             console.log(`${apiUrlRoot}/${deviceID}`);
-            request.put(`${apiUrlRoot}/${deviceID}`,        
-                { json:{"price": 125.5}},
-                function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log('body:', body); // Print message
-                    expect(body).toEqual({ message: 'Fitness device updated' })
-                    };
-                done();  
-                });      
-        
+        request.put(`${apiUrlRoot}/${deviceID}`,        
+            { json:{"price": 125.5}},
+            function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('body:', body); // Print message
+                expect(body).toEqual({ message: 'Fitness device updated' })
+                };
+            done();  
+            });      
+        });
+    });
 
+// GET - TRACKER
+
+// DELETE - By ID
+    test("DELETE gives device removed", async done => {
+        request.get(`${apiUrlRoot}`, function (error, response, body) {
+            let deviceID =  body.slice(9,33);
+        request.delete(`${apiUrlRoot}/${deviceID}`, function(error,response, body){
+            if (!error && response.statusCode == 200) {
+                console.log('body:', body); // Print message
+                expect(body).toEqual("{\"message\":\"Fitness device removed\"}")
+                };
+            done();
+            });
         });
-        
-        // request.put(`${apiUrlRoot}/${deviceID}`,        
-        //     { json:{"price": 125.5}},
-        //     function (error, response, body) {
-        //     if (!error && response.statusCode == 200) {
-        //         console.log('body:', body); // Print message
-        //         }; 
-        //     });          
-            
-        });
-});  
-// Delete - remove records
-  
+    }); 
+}); 

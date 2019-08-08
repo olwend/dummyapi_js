@@ -47,7 +47,6 @@ app.get("/tracker", async (req, res) => {
 
 //POST 
 app.post('/', async (req, res) => {
-    console.log(req.body);
     await insertFd(req.body);
     res.send({ message: 'Fitness device added'});
 });
@@ -61,9 +60,8 @@ app.delete('/:id', async (req, res) => {
 
 //PUT 
 app.put('/:id', async (req, res) => {
-    const update = req.body;
-    await updateFd(req.params.id, update);
-    console.log(update);
+    await updateFd(req.params.id, req.body);
+    console.log(req.body);
     res.send({ message: 'Fitness device updated'});
 
 });
