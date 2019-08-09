@@ -1,7 +1,7 @@
-    This is a basic API written as a learning exercise to understand  http requests 
-writing to a Mongo-memory-server. 
-    
+# Purpose
+    This is a basic API written as a learning exercise to understand  http requests writing to a Mongo-memory-server.  
     Tests demo the functionality.
+    
 ``` 
 > jest
 
