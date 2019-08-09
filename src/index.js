@@ -41,7 +41,7 @@ app.get("/", async (req, res) => {
 app.get("/tracker", async (req, res) => {
     const result = await getOne(req.query._id);
     console.log(result);
-    res.send({ message: 'Result ' + result});
+    res.send(result);
 })
 //byEmail?
 
@@ -61,7 +61,7 @@ app.delete('/:id', async (req, res) => {
 app.put('/:id', async (req, res) => {
     await updateFd(req.params.id, req.body);
     console.log(req.body);
-    res.send({ message: 'Fitness device updated'});
+    res.send({ message: 'Fitness device updated'}); 
 
 });
 
