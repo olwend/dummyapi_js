@@ -41,7 +41,7 @@ app.get("/", async (req, res) => {
 app.get("/tracker", async (req, res) => {
     const result = await getOne(req.query._id);
     console.log(result);
-    res.send(result);
+    res.send({ message: 'Result ' + result});
 })
 //byEmail?
 
@@ -52,8 +52,7 @@ app.post('/', async (req, res) => {
 });
 
 //DELETE 
-app.delete('/:id', async (req, res) => {
-    console.log(req.route);       
+app.delete('/:id', async (req, res) => {     
     await deleteFd(req.params.id);
     res.send({ message: 'Fitness device removed'});
 });

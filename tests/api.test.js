@@ -63,6 +63,19 @@ describe("Basic routes work", () => {
     });
 
 // GET - TRACKER
+    test("the added 'price:' is visible appears in amended row", async done => {
+        request.get(`${apiUrlRoot}`, function (error, response, body) {
+            let deviceID =  body.slice(9,33);
+        request.get(`${apiUrlRoot}/tracker?_id=${deviceID}`,function(error,response, body){
+            if (!error && response.statusCode == 200) {
+                console.log('body:', body); // Print message
+                expect(body).toContain("[object Object]")
+                };
+            done();
+        }); 
+    });
+});
+    
 
 // DELETE - By ID
     test("DELETE gives device removed", async done => {
@@ -78,3 +91,6 @@ describe("Basic routes work", () => {
         });
     }); 
 }); 
+
+
+ 
