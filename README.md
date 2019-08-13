@@ -62,7 +62,9 @@ Time:        1.534s, estimated 6s
 * morgan
 
 # Installation
-When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json
+When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json.
+
+To run the API ``` node src ``` then access data via any browser http://localhost:3001/ 
 
 npm install -g jest may be required to use jest from the command line
 

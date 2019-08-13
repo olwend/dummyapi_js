@@ -26,9 +26,9 @@ app.use(morgan('combined'));
 // start the in-memory MongoDB instance
 startDatabase().then(async () =>{
     await insertFd({email:"a@aa.com", title:"Garmin ForeRunner 235", api:"Aikido Monkey"});
-    await insertFd({email:"b@bb.com", title:"Garmin ForeRunner 935", api:"Biker Monkey"});
-    // await insertFd({email:"c@cc.com", title:"FitBit", api:"FitBit Web API"});
-    // await insertFd({email:"d@dd.com", title:"Apple watch", api:"Health Records"});
+    // await insertFd({email:"b@bb.com", title:"Garmin ForeRunner 935", api:"Biker Monkey"});
+    await insertFd({email:"c@cc.com", title:"FitBit", api:"FitBit Web API"});
+    await insertFd({email:"d@dd.com", title:"Apple watch", api:"Health Records"});
 });
 
 //ROUTES

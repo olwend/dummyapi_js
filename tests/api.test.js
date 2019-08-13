@@ -12,8 +12,8 @@ describe("Basic routes work", () => {
         request(`${apiUrlRoot}`, function (error, response, body) {
             console.log('error:', error); // Print the error if one occurred
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('GET body:', body); // Print '/'api data
-        expect(body).toContain('_id');
+            console.log('GET body:', body); // Print '/'api datas
+    expect(body).toContain('Health Records');
         done();
         });
     });
@@ -69,7 +69,7 @@ describe("Basic routes work", () => {
         request.get(`${apiUrlRoot}/tracker?_id=${deviceID}`,function(error,response, body){
             if (!error && response.statusCode == 200) {
                 console.log('GET body contains new price:', body); // Print message
-                expect(body).toContain('\"price\"');
+                expect(body).toContain('\"price\":125.5');
                 };
             done();
         }); 
