@@ -64,14 +64,26 @@ Time:        1.534s, estimated 6s
 # Installation
 When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json.
 
-To run the API ``` node src ``` then access data via any browser http://localhost:3001/ 
+## Local
+From project DIR ``` node src ``` then access data via any browser http://localhost:3001/ 
 
-npm install -g jest may be required to use jest from the command line
+## Docker
+``` docker build -t dummyapi .```
+
+``` docker image ls ```
+
+``` docker run -it -p 3001:3001  -d dummyapi ```
+
+``` docker ps ```
+
+``` docker logs <Container ID> ```
+
+then access data via any browser http://dockerhostmachine:3001/ 
 
 # Writing tests
 Tests are stored in /__tests__ 
-Browser events are coded via the Puppeteer API
-Asserts are via expect giving access to Jest matchers
+
+Asserts are via expect giving access to Jest matchers to verify 
 
 # Running tests
-npm t or jest will run all tests in the __tests__ directory
+From project DIR npm t or jest will run all tests in the __tests__ directory
