@@ -78,6 +78,10 @@ From project DIR ``` node src ``` then access data via any browser http://localh
 
 ``` docker logs <Container ID> ```
 
+The image can be run direct from a dockerhub public repo
+
+``` docker run -p 3001:3001 olwend/dummyapi:1.0 ```
+
 then access data via any browser http://dockerhostmachine:3001/ 
 
 # Writing tests
@@ -86,4 +90,7 @@ Tests are stored in /__tests__
 Asserts are via expect giving access to Jest matchers to verify 
 
 # Running tests
-From project DIR npm t or jest will run all tests in the __tests__ directory
+From project __DIR__ ``` npm t ``` will run all tests in the __tests__ directory
+
+Screenshot of dockerhub run: 
+![dockerhub](./apidocker_testsrun.png "API run from dockerhub")
