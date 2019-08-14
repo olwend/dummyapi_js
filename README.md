@@ -45,7 +45,7 @@ then access data via any browser http://dockerhostmachine:3001/
 # Writing tests
 Tests are stored in /__tests__ 
 
-Asserts are via expect giving access to Jest matchers to verify 
+Asserts are via expect giving access to Jest matchers to verify http requests & responses.
 
 # Running tests
 From project __DIR__ ``` npm t ``` will run all tests in the __tests__ directory
