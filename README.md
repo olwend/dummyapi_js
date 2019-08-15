@@ -5,7 +5,12 @@
     
 # Infrastructure
     Node server can be run as a docker container.
-    This project uses Jenkins & AWS Codepipeline for CI/CD.
+    __master__   This branch uses Jenkins & AWS Codepipeline for CI/CD.
+    __jenkinsindocker__ This branch builds a pipeline using Ansible & Jenkins to deploy a docker image to webserver
+	        Jenkins: 
+            - Tests - proceed if passes
+            - Build -> Docker image - test at this stage 
+            - Ansible playbook deploy to webserver on EC2 LINUX AMI instance
     
 # Dependencies
 * Jest test runner 
@@ -23,7 +28,7 @@
 When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json.
 
 ## Local
-From project DIR ``` node src ``` then access data via any browser http://localhost:3001/ 
+From project __DIR__ ``` node src ``` then access data via any browser http://localhost:3001/ 
 
 ## Docker
 ``` docker build -t dummyapi .```
