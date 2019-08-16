@@ -3,14 +3,16 @@
     writing to a Mongo-memory-server.  
     Tests demo the functionality.
     
-# Infrastructure
+# Infrastructure - OVERALL AIM TO INCREASE KNOWLEDGE OF DEV OPS
     Node server can be run as a docker container.
     __master__   This branch uses Jenkins & AWS Codepipeline for CI/CD.
-    __jenkinsindocker__ This branch builds a pipeline using Ansible & Jenkins to deploy a docker image to webserver
+    __jenkinsindocker__ This branch builds a pipeline using Jenkins to push a docker image to repository
 	        Jenkins: 
             - Tests - proceed if passes
             - Build -> Docker image - test at this stage 
-            - Ansible playbook deploy to webserver on EC2 LINUX AMI instance
+	    
+NEXT STAGE:
+    - Ansible playbook to create infrastructure for build/ test/ deploy to webserver on EC2 LINUX AMI instance
     
 # Dependencies
 * Jest test runner 
