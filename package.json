@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "API for contract test",
   "main": "index.js",
+
   "scripts": {
-    "test": "jest"
+    "test": "cross-env CI=true jest"
   },
+
   "author": "",
   "license": "ISC",
   "dependencies": {
