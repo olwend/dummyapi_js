@@ -1,59 +1,40 @@
-# Purpose
-    This is a basic API written as a learning exercise to understand  http requests 
-    writing to a Mongo-memory-server.  
-    Tests demo the functionality.
-    
-# Infrastructure
-    Node server can be run as a docker container.
-    __master__   This branch uses Jenkins & AWS Codepipeline for CI/CD.
-    __jenkinsindocker__ This branch builds a pipeline using Ansible & Jenkins to deploy a docker image to webserver
-	        Jenkins: 
-            - Tests - proceed if passes
-            - Build -> Docker image - test at this stage 
-            - Ansible playbook deploy to webserver on EC2 LINUX AMI instance
-    
-# Dependencies
-* Jest test runner 
-* Node version >= 10.15.3
-* npm >= 6.4.1
-* body-parser
-* cors
-* express
-* helmet
-* mongodb
-* mongodb-memory-server
-* morgan
+# Process for Docker container running Jenkins
 
-# Installation
-When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json.
+1.	To start a docker container of jenkinsci
 
-## Local
-From project __DIR__ ``` node src ``` then access data via any browser http://localhost:3001/ 
+```
+docker run \
+-— name jenkins \
+--rm   -u root \
+-p 8080:8080 \
+-v jenkins-data:/var/jenkins_home \ 
+-v /var/run/docker.sock:/var/run/docker.sock  \
+-v "$HOME":/home \
+jenkinsci/blueocean 
 
-## Docker
-``` docker build -t dummyapi .```
+```
+Container port has been opened on 8080
 
-``` docker image ls ```
+```
+bash-4.4# docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                               NAMES
+35864caaa9e4        jenkinsci/blueocean   "/sbin/tini -- /usr/…"   45 hours ago        Up 45 hours         0.0.0.0:8080->8080/tcp, 50000/tcp   jenkins
+```
 
-``` docker run -it -p 3001:3001  -d dummyapi ```
+2.  Set up Jenkins with the admin password
 
-``` docker ps ```
+3.  Can access container via docker 
 
-``` docker logs <Container ID> ```
+        ```
+        docker exec -it jenkins bash
+        ```
+Browse to http://localhost:8080
+4.  
+Then stop Jenkins via CLI (ctrl + C), the settings for Jenkins repo are lost as container cleans up on stop.
 
-The image can be run direct from a dockerhub public repo
+5. Create initial pipeline as  Jenkinsfile. - persists in git hub repo, along with /Jenkins/scripts 
 
-``` docker run -p 3001:3001 olwend/dummyapi:1.0 ```
+6. Pipeline downloads NODE docker image then builds - installing dependencies (npm install) and runs node app as a docker container. 
 
-then access data via any browser http://dockerhostmachine:3001/ 
+7. Git pulled repo maps to home repo of Jenkins container. downloaded to the node_modules workspace (within the /var/jenkins_home/workspace/dummyapi_js directory in the Jenkins container).
 
-# Writing tests
-Tests are stored in /__tests__ 
-
-Asserts are via expect giving access to Jest matchers to verify http requests & responses.
-
-# Running tests
-From project __DIR__ ``` npm t ``` will run all tests in the __tests__ directory
-
-Screenshot of dockerhub run: 
-![dockerhub](./apidocker_testsrun.png "API run from dockerhub")
