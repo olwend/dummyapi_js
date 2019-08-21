@@ -13,8 +13,9 @@ pipeline {
         fileExists 'Dockerfile'
       }
     }
-    stage('Test') {
+    stage('Test10') {
       steps {
+        sh 'node ./src/ &'
         sh 'npm test'
       }
     }
