@@ -26,7 +26,7 @@ pipeline {
 
   post {
         always {
-            echo 'One way or another, I have finished'
+            echo 'This has finished so I am cleaning workspace'
             deleteDir() /* clean up our workspace */
         }
         success {
@@ -38,8 +38,8 @@ pipeline {
         failure {
             echo 'I failed :('
         }
-        changed {
-            echo 'Things were different before...'
+        fixed {
+            echo 'Things have improved on previous run...'
         }
     }
 }
