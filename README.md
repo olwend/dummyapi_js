@@ -25,16 +25,17 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
 
 3.  Can access container via docker 
 
-        ```
+        
         docker exec -it jenkins bash
-        ```
+        
 Browse to http://localhost:8080
-4.  
-Then stop Jenkins via CLI (ctrl + C), the settings for Jenkins repo are lost as container cleans up on stop.
+
+4. Stop Jenkins via CLI (ctrl + C), the settings for Jenkins repo are lost as container cleans up on stop.
 
 5. Create initial pipeline as  Jenkinsfile. - persists in git hub repo, along with /Jenkins/scripts 
 
-6. Pipeline downloads NODE docker image then builds - installing dependencies (npm install) and runs node app as a docker container. 
+6. Pipeline downloads NODE docker image then builds - installing dependencies (npm install) and runs node app as a docker          container. 
 
-7. Git pulled repo maps to home repo of Jenkins container. downloaded to the node_modules workspace (within the /var/jenkins_home/workspace/dummyapi_js directory in the Jenkins container).
+7. Git pulled repo maps to home repo of Jenkins container downloaded to the node_modules workspace 
+        (within the /var/jenkins_home/workspace/dummyapi_js directory in the Jenkins container).
 
