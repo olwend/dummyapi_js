@@ -1,3 +1,4 @@
+
 # Purpose
     This is a basic API written as a learning exercise to understand  http requests 
     writing to a Mongo-memory-server.  
@@ -28,36 +29,44 @@ NEXT STAGE:
 * mongodb-memory-server
 * morgan
 
-# Installation
-When you have upgraded node and npm to meet above requirements run npm install to get packages listed in the package.json.
+# Process for Docker container running Jenkins
 
-## Local
-From project __DIR__ ``` node src ``` then access data via any browser http://localhost:3001/ 
+1.	To start a docker container of jenkinsci
 
-## Docker
-``` docker build -t dummyapi .```
+```
+docker run \
+-— name jenkins \
+--rm   -u root \
+-p 8080:8080 \
+-v jenkins-data:/var/jenkins_home \ 
+-v /var/run/docker.sock:/var/run/docker.sock  \
+-v "$HOME":/home \
+jenkinsci/blueocean 
 
-``` docker image ls ```
+```
+Container port has been opened on 8080
 
-``` docker run -it -p 3001:3001  -d dummyapi ```
+```
+bash-4.4# docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                               NAMES
+35864caaa9e4        jenkinsci/blueocean   "/sbin/tini -- /usr/…"   45 hours ago        Up 45 hours         0.0.0.0:8080->8080/tcp, 50000/tcp   jenkins
+```
 
-``` docker ps ```
+2.  Set up Jenkins with the admin password
 
-``` docker logs <Container ID> ```
+3.  Can access container via docker 
 
-The image can be run direct from a dockerhub public repo
+        
+        docker exec -it jenkins bash
+        
+Browse to http://localhost:8080
 
-``` docker run -p 3001:3001 olwend/dummyapi:1.0 ```
+4. Stop Jenkins via CLI (ctrl + C), the settings for Jenkins repo are lost as container cleans up on stop.
 
-then access data via any browser http://dockerhostmachine:3001/ 
+5. Create initial pipeline as  Jenkinsfile. - persists in git hub repo, along with /Jenkins/scripts 
 
-# Writing tests
-Tests are stored in /__tests__ 
+6. Pipeline downloads NODE docker image then builds - installing dependencies (npm install) and runs node app as a docker          container. 
 
-Asserts are via expect giving access to Jest matchers to verify http requests & responses.
+7. Git pulled repo maps to home repo of Jenkins container downloaded to the node_modules workspace 
+        (within the /var/jenkins_home/workspace/dummyapi_js directory in the Jenkins container).
 
-# Running tests
-From project __DIR__ ``` npm t ``` will run all tests in the __tests__ directory
-
-Screenshot of dockerhub run: 
-![dockerhub](./apidocker_testsrun.png "API run from dockerhub")

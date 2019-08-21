@@ -4,6 +4,8 @@ FROM node:10
 # app directory
 WORKDIR /usr/src/app
 
+ENV myCustomEnvVar="This is a sample."
+
 # install dependencies
 COPY package*.json ./
 
