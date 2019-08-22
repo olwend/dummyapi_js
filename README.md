@@ -1,3 +1,34 @@
+
+# Purpose
+    This is a basic API written as a learning exercise to understand  http requests 
+    writing to a Mongo-memory-server.  
+    Tests demo the functionality.
+    
+# Infrastructure - INCREASE KNOWLEDGE OF DEV OPS
+    Node server can be run as a docker container.
+    To progress I first set up AWS Codepipeline for CI/CD.  This was consuming high amount of resource so I stopped instance.
+    __jenkinsindocker__ This branch builds a pipeline using Jenkins in a docker container to push a docker image to repository
+	        Jenkins: 
+	    - Build app from pipeline
+            - Tests - proceed if passes
+            - Build -> Docker image 
+	    - Push to DockerHub
+	    
+NEXT STAGE:
+    - Ansible playbook to create infrastructure for build/ test/ deploy to webserver on EC2 LINUX AMI instance
+    
+# Dependencies
+* Jest test runner 
+* Node version >= 10.15.3
+* npm >= 6.4.1
+* body-parser
+* cors
+* express
+* helmet
+* mongodb
+* mongodb-memory-server
+* morgan
+
 # Process for Docker container running Jenkins
 
 1.	To start a docker container of jenkinsci
