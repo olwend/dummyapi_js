@@ -21,6 +21,7 @@
     "moduleFileExtensions": [
       "js"
     ]
+   
   },
   "scripts": {
     "test": "jest --coverage",

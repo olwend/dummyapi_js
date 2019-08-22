@@ -5,7 +5,7 @@ pipeline {
       args '-p 3000:3000'
     }
 
-  }
+  }   
   stages {
     stage('Build') {
       steps {
@@ -17,6 +17,7 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
+        sh 'publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'dummyAPI/src/', reportFiles: 'index.html, lint.html', reportName: 'HTML Report', reportTitles: 'CodeCoverage, EsLint'])'
       }
     }
   }
