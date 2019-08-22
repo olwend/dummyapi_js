@@ -4,7 +4,9 @@ pipeline {
       image 'node:10'
       args '-p 3000:3000'
     }
-
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
   }   
   stages {
     stage('Build') {
@@ -17,6 +19,7 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
+       
       }
     }
   }
@@ -31,6 +34,14 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
+             publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'coverage/src',
+                reportFiles: 'index.html',
+                reportName: 'Coverage Report'
+            ]
         }
         unstable {
             echo 'I am unstable :/'
