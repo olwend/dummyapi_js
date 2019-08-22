@@ -17,7 +17,6 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
-        sh 'publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'dummyAPI/src/', reportFiles: 'index.html, lint.html', reportName: 'HTML Report', reportTitles: 'CodeCoverage, EsLint'])'
       }
     }
   }
@@ -31,7 +30,7 @@ pipeline {
             deleteDir() /* clean up our workspace */
         }
         success {
-            echo 'I succeeeded!'
+            echo 'I succeeded!'
         }
         unstable {
             echo 'I am unstable :/'
