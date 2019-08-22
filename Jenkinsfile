@@ -4,9 +4,7 @@ pipeline {
       image 'node:10'
       args '-p 3000:3000'
     }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '10'))
-  }
+
   }   
   stages {
     stage('Build') {
