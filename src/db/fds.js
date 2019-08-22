@@ -17,7 +17,6 @@ async function getFds() {
 async function getIDs() {
     const database = await getDatabase();
     let device = await database.collection(collectionName).findOne({email:"a@aa.com"}).ObjectID;
-    console.log(device);  
     return device;
 }
 
@@ -42,11 +41,10 @@ async function updateFd(id, fd) {
         {_id: new ObjectID(id), },
         {
             $set: {
-                ...fd,
+                fd,
             },
         },
     );
-
 }
 
 module.exports = {

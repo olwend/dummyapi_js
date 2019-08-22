@@ -26,7 +26,7 @@ app.use(morgan('combined'));
 // start the in-memory MongoDB instance
 startDatabase().then(async () =>{
     await insertFd({email:"a@aa.com", title:"Garmin ForeRunner 235", api:"Aikido Monkey"});
-    // await insertFd({email:"b@bb.com", title:"Garmin ForeRunner 935", api:"Biker Monkey"});
+    await insertFd({email:"b@bb.com", title:"Garmin ForeRunner 935", api:"Biker Monkey"});
     await insertFd({email:"c@cc.com", title:"FitBit", api:"FitBit Web API"});
     await insertFd({email:"d@dd.com", title:"Apple watch", api:"Health Records"});
 });
@@ -39,8 +39,7 @@ app.get("/", async (req, res) => {
 
 //byID 
 app.get("/tracker", async (req, res) => {
-    const result = await getOne(req.query._id);
-    console.log(result);
+    let result = await getOne(req.query._id);
     res.send(result);
 })
 //byEmail?
@@ -60,12 +59,10 @@ app.delete('/:id', async (req, res) => {
 //PUT 
 app.put('/:id', async (req, res) => {
     await updateFd(req.params.id, req.body);
-    console.log(req.body);
     res.send({ message: 'Fitness device updated'}); 
-
 });
 
 //start the server
 app.listen(3001, async () => {
-    console.log("listening on port 3001");
+    console.log("listening on port 3001")
 });
