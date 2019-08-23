@@ -26,7 +26,6 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
-       
       }
     }
   }
