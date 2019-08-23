@@ -11,6 +11,14 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm run lint'
+        publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'lint.html',
+                reportName: 'Lint Report'
+            ]
         fileExists 'Dockerfile'
       }
     }
@@ -37,7 +45,7 @@ pipeline {
                 allowMissing: true,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'coverage/src',
+                reportDir: './coverage/src',
                 reportFiles: 'index.html',
                 reportName: 'Coverage Report'
             ]
