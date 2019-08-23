@@ -2,7 +2,7 @@ const request = require('request');
 let apiUrlRoot = 'http://localhost:3001'; 
 
 // GET - In memory mongo populated initial data
-describe("Basic routes work", () => {
+describe("Basic routes work ", () => {
     test("gets seeded data", async done => {
         request(`${apiUrlRoot}`, function (error, response, body) {
         expect(response.statusCode).toEqual(200); 
@@ -13,7 +13,7 @@ describe("Basic routes work", () => {
 
 
 // POST new record
-test("can POST new device", async done => {
+test("can POST new device   ", async done => {
     request.post(`${apiUrlRoot}`,
     { json:{"email":"t@tt.com","title":"Testing TestRunner 235","api":"Aikido Testkey"}},
     function (error, response) {
@@ -25,7 +25,7 @@ test("can POST new device", async done => {
 
 // GET - verify addition is one of the body items
 
-    test("can GET added device", async done => {
+    test("can GET added device  ", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 expect(body).toContain('Testing TestRunner 235');
@@ -35,7 +35,7 @@ test("can POST new device", async done => {
         });
         
 // PUT - update existing record using id
-    test("can PUT update new field to device", async done => {
+    test("can PUT update new field to device    ", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             let deviceID =  body.slice(9,33);
         request.put(`${apiUrlRoot}/${deviceID}`,        
@@ -50,7 +50,7 @@ test("can POST new device", async done => {
     });
 
 // GET - TRACKER
-    test("the added 'price:' exists in amended row", async done => {
+    test("the added 'price:' exists in amended row  ", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             let deviceID =  body.slice(9,33);
         request.get(`${apiUrlRoot}/tracker?_id=${deviceID}`,function(error,response, body){
@@ -63,7 +63,7 @@ test("can POST new device", async done => {
 });
     
 // DELETE - By ID
-    test("DELETE gives device removed", async done => {
+    test("DELETE gives device removed   ", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             let deviceID =  body.slice(9,33);
         request.delete(`${apiUrlRoot}/${deviceID}`, function(error,response, body){
