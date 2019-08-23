@@ -2,10 +2,5 @@ node_modules
 coverage
 *.DS_Store
 *.html
-base.css
-block-navigation.js
-index.html
-prettify.css
-prettify.js
-sort-arrow-sprite.png
-sorter.js
+
+
