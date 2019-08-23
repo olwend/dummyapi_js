@@ -2,7 +2,7 @@ const request = require('request');
 let apiUrlRoot = 'http://localhost:3001'; 
 
 // GET - In memory mongo populated initial data
-describe("Basic routes work ", () => {
+describe("Basic routes work     ", () => {
     test("gets seeded data", async done => {
         request(`${apiUrlRoot}`, function (error, response, body) {
         expect(response.statusCode).toEqual(200); 
@@ -50,7 +50,7 @@ test("can POST new device   ", async done => {
     });
 
 // GET - TRACKER
-    test("the added 'price:' exists in amended row  ", async done => {
+    test("'price:' exists in amended row  ", async done => {
         request.get(`${apiUrlRoot}`, function (error, response, body) {
             let deviceID =  body.slice(9,33);
         request.get(`${apiUrlRoot}/tracker?_id=${deviceID}`,function(error,response, body){
