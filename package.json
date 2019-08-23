@@ -20,8 +20,8 @@
     },
     "moduleFileExtensions": [
       "js"
-    ]
-   
+    ],
+    "testResultsProcessor": "./node_modules/jest-html-reporter"
   },
   "scripts": {
     "test": "jest --coverage",
