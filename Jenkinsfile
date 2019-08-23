@@ -19,6 +19,14 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
+        publishHTML target: [
+          allowMissing: true,
+          alwaysLinkToLastBuild: false,
+          keepAll: true,
+          reportDir: '.',
+          reportFiles: 'lint.html, index.html, test-report.html',
+          reportName: 'Coverage Report'
+          ]
       }
     }
   }
@@ -33,14 +41,7 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-             publishHTML target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'lint.html, index.html, test-report.html',
-                reportName: 'Coverage Report'
-            ]
+
         }
         unstable {
             echo 'I am unstable :/'
