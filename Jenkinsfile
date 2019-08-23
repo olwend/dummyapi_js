@@ -1,4 +1,10 @@
 pipeline {
+
+  environment {
+    CI = 'true'
+    registry = 'cloud.docker.com/olwend'
+    registryCredential = 'm0nTana'
+  }
   agent {
     docker {
       image 'node:10'
@@ -13,6 +19,9 @@ pipeline {
         sh 'npm run lint'
         
         fileExists 'Dockerfile'
+        // docker command line - see Docker docs
+        sh 'docker build -t ${env.BUILD_TAG}
+        }
       }
     }
     stage('Test10') {
@@ -30,9 +39,6 @@ pipeline {
           ]
       }
     }
-  }
-  environment {
-    CI = 'true'
   }
 
   post {
