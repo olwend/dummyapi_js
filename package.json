@@ -3,8 +3,30 @@
   "version": "1.0.0",
   "description": "API for contract test",
   "main": "index.js",
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageDirectory": "./coverage",
+    "coverageReporters": [
+      "html",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 0
+      }
+    },
+    "moduleFileExtensions": [
+      "js"
+    ]
+   
+  },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint . -f html > lint.html"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +41,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^6.2.1",
     "jest": "^24.8.0",
     "jest-html-reporter": "^2.5.0",
     "nodemon": "^1.19.1",

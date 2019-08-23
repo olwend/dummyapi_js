@@ -5,11 +5,20 @@ pipeline {
       args '-p 3000:3000'
     }
 
-  }
+  }   
   stages {
     stage('Build') {
       steps {
         sh 'npm install'
+        sh 'npm run lint'
+        publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'lint.html',
+                reportName: 'Lint Report'
+            ]
         fileExists 'Dockerfile'
       }
     }
@@ -30,7 +39,15 @@ pipeline {
             deleteDir() /* clean up our workspace */
         }
         success {
-            echo 'I succeeeded!'
+            echo 'I succeeded!'
+             publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: './coverage/src',
+                reportFiles: 'index.html',
+                reportName: 'Coverage Report'
+            ]
         }
         unstable {
             echo 'I am unstable :/'

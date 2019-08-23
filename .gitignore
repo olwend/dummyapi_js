@@ -1,2 +1,10 @@
 node_modules
-
+coverage
+.DS_Store
+lint.html
+src/.DS_Store
+src/db/fds.js.html
+src/db/index.html
+src/db/mongo.js.html
+src/index.html
+src/index.js.html
