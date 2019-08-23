@@ -19,12 +19,13 @@ pipeline {
       steps {
         sh 'node ./src/ &'
         sh 'npm test'
+        sh 'mv ./index.html ./coverage.html'
         publishHTML target: [
           allowMissing: true,
           alwaysLinkToLastBuild: false,
           keepAll: true,
           reportDir: '.',
-          reportFiles: 'lint.html, index.html, Tests.html',
+          reportFiles: 'lint.html, coverage.html, tests.html',
           reportName: 'Coverage Report'
           ]
       }
