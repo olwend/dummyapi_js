@@ -1,5 +1,5 @@
 {
 	"pageTitle": "DUMMY API",
-	"outputPath": "./Tests.html",
+	"outputPath": "./tests.html",
 	"includeFailureMsg": false
 }
