@@ -2,9 +2,9 @@
 FROM node:10
 
 # app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-ENV myCustomEnvVar="This is a sample."
+ENV myDummyAPI="DummyAPI"
 
 # install dependencies
 COPY package*.json ./
@@ -18,7 +18,7 @@ COPY . .
 EXPOSE 3001
 
 # define runtime
-CMD [ "node", "/usr/src/app/src"]
+CMD [ "node", "/app/src"]
 
 
 

@@ -20,13 +20,14 @@ pipeline {
         
         fileExists 'Dockerfile'
         // docker command line - see Docker docs
-        sh 'docker build -t ${env.BUILD_TAG}
+        
         }
       }
     }
     stage('Test10') {
       steps {
         sh 'node ./src/ &'
+        echo 'Running tests in a fully containerized environment...'
         sh 'npm test'
         sh 'mv ./index.html ./coverage.html'
         publishHTML target: [
@@ -37,6 +38,7 @@ pipeline {
           reportFiles: 'lint.html, coverage.html, tests.html',
           reportName: 'Coverage Report'
           ]
+          // sh 'docker build -t ${env.BUILD_TAG}'
       }
     }
   }
