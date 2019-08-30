@@ -35,7 +35,7 @@ NEXT STAGE:
 
 ```
 docker run \
--— name jenkins \
+-—name jenkins \
 --rm   -u root \
 -p 8080:8080 \
 -v jenkins-data:/var/jenkins_home \ 
