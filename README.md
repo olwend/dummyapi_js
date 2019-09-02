@@ -58,7 +58,7 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
 
 2.  Set up Jenkins with the admin password
 
-3.  Can access container via docker using name as shown above docker ps
+3.  Can access container via docker using name as shown above 
 
         
         docker exec -it dummyapi_jenkins_1 bash

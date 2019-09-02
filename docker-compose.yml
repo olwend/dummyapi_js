@@ -4,8 +4,10 @@ services:
     user: root
     ports: 
       - "8080:8080"
+      - "8443:8443"
+      - "50000:50000"
     volumes: 
-      - "jenkins-data:/var/jenkins-home"
+      - "jenkins-data:/var/jenkins_home"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/Users/olwendavies:/home"
 version: "3"

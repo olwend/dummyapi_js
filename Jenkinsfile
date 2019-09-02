@@ -2,13 +2,13 @@ pipeline {
 
   environment {
     CI = 'true'
-    // registry = 'cloud.docker.com/olwend'
-    // registryCredential = 'm0nTana1'
   }
+
   agent {
     docker {
       image 'node:10'
       args '-p 3000:3000'
+x
     }
 
   }  
@@ -20,8 +20,8 @@ pipeline {
         sh 'npm run lint'
   // Docker docs - build docker image on latest code and run that image below
         fileExists 'Dockerfile'
-        // sh 'docker build --tag=dummyapi .'
-
+        sh 'which docker;docker version'
+        sh 'docker build --tag=dummyapi .'
         
         }
       }
