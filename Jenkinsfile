@@ -3,7 +3,7 @@ pipeline {
   environment {
     CI = 'true'
     registry = 'cloud.docker.com/olwend'
-    registryCredential = 'm0nTana'
+    registryCredential = 'm0nTana1'
   }
   agent {
     docker {
@@ -17,16 +17,18 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm run lint'
-        
+  // Docker docs - build docker image on latest code and run that image below
         fileExists 'Dockerfile'
-        // docker command line - see Docker docs
+        sh 'docker build --tag=dummyapi .'
+
         
         }
       }
     }
     stage('Test10') {
       steps {
-        sh 'node ./src/ &'
+        sh 'docker run -d -p 3001:3001 dummyapi'
+        // sh 'node ./src/ &'
         echo 'Running tests in a fully containerized environment...'
         sh 'npm test'
         sh 'mv ./index.html ./coverage.html'
@@ -39,6 +41,7 @@ pipeline {
           reportName: 'Coverage Report'
           ]
           // sh 'docker build -t ${env.BUILD_TAG}'
+          // push to docker hub
       }
     }
   }

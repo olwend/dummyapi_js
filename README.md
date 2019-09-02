@@ -42,22 +42,25 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock  \
 -v "$HOME":/home \
 jenkinsci/blueocean 
-
 ```
+Enhancement:  docker-compose.yml
+
+ ```docker-compose up``` follow up with ```docker-compose down``` to clean up
+
 Container port has been opened on 8080
 
 ```
 bash-4.4# docker ps
 CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                               NAMES
-35864caaa9e4        jenkinsci/blueocean   "/sbin/tini -- /usr/…"   45 hours ago        Up 45 hours         0.0.0.0:8080->8080/tcp, 50000/tcp   jenkins
+35864caaa9e4        jenkinsci/blueocean   "/sbin/tini -- /usr/…"   45 hours ago        Up 45 hours         0.0.0.0:8080->8080/tcp, 50000/tcp   dummyapi_jenkins_1
 ```
 
 2.  Set up Jenkins with the admin password
 
-3.  Can access container via docker 
+3.  Can access container via docker using name as shown above docker ps
 
         
-        docker exec -it jenkins bash
+        docker exec -it dummyapi_jenkins_1 bash
         
 Browse to http://localhost:8080
 
