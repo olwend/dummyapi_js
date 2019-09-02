@@ -20,7 +20,7 @@ pipeline {
         sh 'npm run lint'
   // Docker docs - build docker image on latest code and run that image below
         fileExists 'Dockerfile'
-        sh 'docker build --tag=dummyapi .'
+        // sh 'docker build --tag=dummyapi .'
 
         
         }
@@ -28,8 +28,8 @@ pipeline {
     
     stage('Test10') {
       steps {
-        sh 'docker run -d -p 3001:3001 dummyapi'
-        // sh 'node ./src/ &'
+        // sh 'docker run -d -p 3001:3001 dummyapi'
+        sh 'node ./src/ &'
         echo 'Running tests in a fully containerized environment...'
         sh 'npm test'
         sh 'mv ./index.html ./coverage.html'
