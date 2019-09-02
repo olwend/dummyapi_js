@@ -25,7 +25,7 @@ pipeline {
         
         }
       }
-    }
+    
     stage('Test10') {
       steps {
         sh 'docker run -d -p 3001:3001 dummyapi'
@@ -43,6 +43,7 @@ pipeline {
           ]
           // sh 'docker build -t ${env.BUILD_TAG}'
           // push to docker hub
+        }
       }
     }
 
