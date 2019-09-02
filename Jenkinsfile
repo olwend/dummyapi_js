@@ -2,8 +2,8 @@ pipeline {
 
   environment {
     CI = 'true'
-    registry = 'cloud.docker.com/olwend'
-    registryCredential = 'm0nTana1'
+    // registry = 'cloud.docker.com/olwend'
+    // registryCredential = 'm0nTana1'
   }
   agent {
     docker {
