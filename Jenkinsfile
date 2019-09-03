@@ -3,12 +3,12 @@ pipeline {
   agent any
 
   stages {
-    stage('Run lint pre build for test') {
-      steps {
-        sh 'npm install'
-        sh 'npm run lint'
+      stage('Run lint pre build for test') {
+        steps {
+          sh 'npm install'
+          sh 'npm run lint'
+          }
         }
-      }
 
     // stage build image - push to dockerhub
     
@@ -20,7 +20,7 @@ pipeline {
       //     image 'node:10'
       //     args '-p 3001:3001'
       //   }
-      }
+    
 
         steps {
           // sh 'docker run -d -p 3001:3001 dummyapi'
@@ -37,7 +37,7 @@ pipeline {
             reportName: 'Coverage Report'
             ]
           }
-      s}
+      }
 
       // stage('To provision EC2 instance')
 
@@ -55,7 +55,7 @@ pipeline {
       }
 
       //  smoke test of EC2 image
-    }
+  }
 
     environment {
       CI = 'true'
