@@ -1,50 +1,64 @@
 pipeline {
 
-  environment {
-    CI = 'true'
-  }
-
-  agent {
-    docker {
-      image 'node:10'
-      args '-p 3000:3000'
-x
-    }
-
-  }  
+  agent any
 
   stages {
-    stage('Build') {
+    stage('Run lint pre build for test') {
       steps {
         sh 'npm install'
         sh 'npm run lint'
-  // Docker docs - build docker image on latest code and run that image below
-        fileExists 'Dockerfile'
-        sh 'which docker;docker version'
-        sh 'docker build --tag=dummyapi .'
-        
         }
       }
+
+    // stage build image - push to dockerhub
     
-    stage('Test10') {
-      steps {
-        // sh 'docker run -d -p 3001:3001 dummyapi'
-        sh 'node ./src/ &'
-        echo 'Running tests in a fully containerized environment...'
-        sh 'npm test'
-        sh 'mv ./index.html ./coverage.html'
-        publishHTML target: [
-          allowMissing: true,
-          alwaysLinkToLastBuild: false,
-          keepAll: true,
-          reportDir: '.',
-          reportFiles: 'lint.html, coverage.html, tests.html',
-          reportName: 'Coverage Report'
-          ]
-          // sh 'docker build -t ${env.BUILD_TAG}'
-          // push to docker hub
+    // create agent container with image
+    stage('Testimage') {
+      // docker pull olwend/dummyapi
+      agent {
+        docker {
+          image 'node:10'
+          args '-p 3001:3001'
         }
       }
+
+        steps {
+          // sh 'docker run -d -p 3001:3001 dummyapi'
+          sh 'node ./src/ &'
+          echo 'Running tests in a fully containerized environment...'
+          sh 'npm test'
+          sh 'mv ./index.html ./coverage.html'
+          publishHTML target: [
+            allowMissing: true,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: '.',
+            reportFiles: 'lint.html, coverage.html, tests.html',
+            reportName: 'Coverage Report'
+            ]
+          }
+      s}
+
+      // stage('To provision EC2 instance')
+
+      // configure instance - add Docker
+      //  pull image and run container
+ // Docker docs - build docker image on latest code and run that image below
+      stage('Build docker'){
+        steps {
+        sh 'docker build  .'
+            echo ' Built docker image'}
+          // sh 'docker build --tag=dummyapi .'
+      //             // sh 'docker build  .'
+      //     // push to docker hub
+         
+      }
+
+      //  smoke test of EC2 image
+    }
+
+    environment {
+      CI = 'true'
     }
 
   post {
