@@ -36,10 +36,10 @@ pipeline {
   }
 
   post {
-        always {
-            echo 'This has finished so I am cleaning workspace'
-            deleteDir() /* clean up our workspace */
-        }
+        // always {
+        //     echo 'This has finished so I am cleaning workspace'
+        //     deleteDir() /* clean up our workspace */
+        // }
         success {
             echo 'I succeeded!'
 
