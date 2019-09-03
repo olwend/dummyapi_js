@@ -15,11 +15,11 @@ pipeline {
     // create agent container with image
     stage('Testimage') {
       // docker pull olwend/dummyapi
-      agent {
-        docker {
-          image 'node:10'
-          args '-p 3001:3001'
-        }
+      // agent {
+      //   docker {
+      //     image 'node:10'
+      //     args '-p 3001:3001'
+      //   }
       }
 
         steps {
