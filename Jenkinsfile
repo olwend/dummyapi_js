@@ -29,7 +29,6 @@ pipeline {
 
                 // sh 'node ./src/ &'
             }
-        }
 
         stage('Test_node10') {
             
@@ -44,9 +43,7 @@ pipeline {
             reportName: 'Coverage Report'
             ]
         }
-        }
     }
-
 
     post {
             // always {
