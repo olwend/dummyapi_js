@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage( build & run app) {
+        stage( 'build & run app') {
             steps {
                 sh 'docker build --tag=dummyapi .'
                 sh 'docker run -p 3001:3001 dummyapi'
