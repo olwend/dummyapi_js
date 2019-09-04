@@ -46,22 +46,23 @@ pipeline {
         //     }
         // }
 
-        // stage('Test_node10') {
-        //     steps {
-        //         // sh 'docker run -p 3001:3001 dummyapi'
-        //         sh 'node ./src/ &'
-        //         sh 'npm test'
-        //         sh 'mv ./index.html ./coverage.html'
-        //         publishHTML target: [
-        //         allowMissing: true,
-        //         alwaysLinkToLastBuild: false,
-        //         keepAll: true,
-        //         reportDir: '.',
-        //         reportFiles: 'lint.html, coverage.html, tests.html',
-        //         reportName: 'Coverage Report'
-        //         ]
-        //     }
-        // }
+        stage('Test_node10') {
+            agent { dockerfile true }
+            steps {
+                // sh 'docker run -p 3001:3001 dummyapi'
+                // /sh 'node ./src/ &'
+                sh 'npm test'
+                sh 'mv ./index.html ./coverage.html'
+                publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'lint.html, coverage.html, tests.html',
+                reportName: 'Coverage Report'
+                ]
+            }
+        }
     }
 
     post {
