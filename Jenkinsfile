@@ -31,7 +31,7 @@ pipeline {
             }
 
         stage('Test_node10') {
-            
+            steps {
             sh 'npm test'
             sh 'mv ./index.html ./coverage.html'
             publishHTML target: [
@@ -42,6 +42,7 @@ pipeline {
             reportFiles: 'lint.html, coverage.html, tests.html',
             reportName: 'Coverage Report'
             ]
+            }
         }
     }
 
