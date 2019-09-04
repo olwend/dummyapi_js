@@ -20,7 +20,8 @@ pipeline {
         stage('lint test') {
 
             steps {
-                def node = nod
+                // def node = sh 'node --version'
+                // echo node
                 sh 'npm install'
                 sh 'npm run lint'
                 
