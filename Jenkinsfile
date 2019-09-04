@@ -4,12 +4,12 @@ pipeline {
         CI = 'true'
     }
 
-    agent {
-        docker {
-            image 'node:10'
-            args '-p 3000:3000'
-        }
-    }
+    agent docker {
+                    image 'node:10'
+                    args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
+                    }
+                }
+
 
     stages {
         stage('lint test') {
@@ -22,6 +22,7 @@ pipeline {
         }
 
         stage( 'build app') {
+
             steps {
                 script{
                     app = docker.build("dummyapi:${env.BUILD_ID}")
