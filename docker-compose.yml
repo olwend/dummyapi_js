@@ -1,3 +1,5 @@
+version: "3"
+
 services: 
   jenkins: 
     image: jenkinsci/blueocean
@@ -10,6 +12,6 @@ services:
       - "jenkins-data:/var/jenkins_home"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/Users/olwendavies:/home"
-version: "3"
+
 volumes:
   jenkins-data:
