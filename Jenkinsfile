@@ -30,6 +30,7 @@ pipeline {
                 
                 // sh 'node ./src/ &'
             }
+        }
 
         stage('Test_node10') {
             steps {
@@ -49,22 +50,22 @@ pipeline {
     }
 
     post {
-            // always {
-            //     echo 'This has finished so I am cleaning workspace'
-            //     deleteDir() /* clean up our workspace */
-            // }
-            success {
-                echo 'I succeeded!'
+        // always {
+        //     echo 'This has finished so I am cleaning workspace'
+        //     deleteDir() /* clean up our workspace */
+        // }
+        success {
+            echo 'I succeeded!'
 
-            }
-            unstable {
-                echo 'I am unstable :/'
-            }
-            failure {
-                echo 'I failed :('
-            }
-            fixed {
-                echo 'Things have improved on previous run...'
-            }
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        fixed {
+            echo 'Things have improved on previous run...'
         }
     }
+}
