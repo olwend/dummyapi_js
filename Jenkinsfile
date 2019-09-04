@@ -4,24 +4,27 @@ pipeline {
         CI = 'true'
     }
 
-    agent {
-        docker {
-            image 'node:10'
-            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
-            }
-        }
+    // agent {
+    //     docker {
+    //         image 'node:10'
+    //         args '-p 3000:3000'
+    //         }
+    //     }
     options{
         timestamps()
     }
-   
-
 
     stages {
         stage('lint test') {
+                agent {
+                    docker {
+                        image 'node:10'
+                        args '-p 3000:3000'
+                        }
+                    }
 
             steps {
-                // def node = sh 'node --version'
-                // echo node
+                sh 'node --version'
                 sh 'npm install'
                 sh 'npm run lint'
                 
@@ -41,22 +44,22 @@ pipeline {
         //     }
         // }
 
-        stage('Test_node10') {
-            steps {
-                // sh 'docker run -p 3001:3001 dummyapi'
-                sh 'node ./src/ &'
-                sh 'npm test'
-                sh 'mv ./index.html ./coverage.html'
-                publishHTML target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'lint.html, coverage.html, tests.html',
-                reportName: 'Coverage Report'
-                ]
-            }
-        }
+        // stage('Test_node10') {
+        //     steps {
+        //         // sh 'docker run -p 3001:3001 dummyapi'
+        //         sh 'node ./src/ &'
+        //         sh 'npm test'
+        //         sh 'mv ./index.html ./coverage.html'
+        //         publishHTML target: [
+        //         allowMissing: true,
+        //         alwaysLinkToLastBuild: false,
+        //         keepAll: true,
+        //         reportDir: '.',
+        //         reportFiles: 'lint.html, coverage.html, tests.html',
+        //         reportName: 'Coverage Report'
+        //         ]
+        //     }
+        // }
     }
 
     post {
