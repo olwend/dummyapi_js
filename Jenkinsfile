@@ -65,6 +65,7 @@ pipeline {
     }
 
     post {
+        agent any 
         always {
             echo 'This has finished so I am cleaning workspace'
             deleteDir() /* clean up our workspace */
