@@ -10,14 +10,17 @@ pipeline {
             args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
             }
         }
-    options {
-        {timestamps()}
+    options{
+        timestamps()
     }
+   
 
 
     stages {
         stage('lint test') {
+
             steps {
+                def node = nod
                 sh 'npm install'
                 sh 'npm run lint'
                 
