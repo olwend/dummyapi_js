@@ -21,27 +21,29 @@ pipeline {
             }
         }
 
-        stage( 'build & run app') {
+        stage( 'build app') {
             steps {
-                sh 'docker build --tag=dummyapi .'
-                sh 'docker run -p 3001:3001 dummyapi'
+                script{
+                    app = docker.build("dummyapi:${env.BUILD_ID}")
                 }
-
+            
+                
                 // sh 'node ./src/ &'
             }
 
         stage('Test_node10') {
             steps {
-            sh 'npm test'
-            sh 'mv ./index.html ./coverage.html'
-            publishHTML target: [
-            allowMissing: true,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: '.',
-            reportFiles: 'lint.html, coverage.html, tests.html',
-            reportName: 'Coverage Report'
-            ]
+                sh 'docker run -p 3001:3001 dummyapi'
+                sh 'npm test'
+                sh 'mv ./index.html ./coverage.html'
+                publishHTML target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'lint.html, coverage.html, tests.html',
+                reportName: 'Coverage Report'
+                ]
             }
         }
     }
