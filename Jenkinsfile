@@ -4,11 +4,12 @@ pipeline {
         CI = 'true'
     }
 
-    agent docker {
-                    image 'node:10'
-                    args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
-                    }
-                }
+    agent {
+        docker {
+            image 'node:10'
+            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
+            }
+        }
 
 
     stages {
@@ -69,4 +70,3 @@ pipeline {
             echo 'Things have improved on previous run...'
         }
     }
-}
