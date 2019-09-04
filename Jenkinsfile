@@ -20,9 +20,19 @@ pipeline {
                 fileExists 'Dockerfile'
             }
         }
-        stage('Test_node10') {
+
+        stage( build & run app) {
             steps {
-            sh 'node ./src/ &'
+                sh 'docker build --tag=dummyapi .'
+                sh 'docker run -p 3001:3001 dummyapi'
+                }
+
+                // sh 'node ./src/ &'
+            }
+        }
+
+        stage('Test_node10') {
+            
             sh 'npm test'
             sh 'mv ./index.html ./coverage.html'
             publishHTML target: [
