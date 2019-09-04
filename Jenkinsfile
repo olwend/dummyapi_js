@@ -1,12 +1,18 @@
 pipeline {
-    agent 
+    
+    environment {
+        CI = 'true'
+    }
+
+    agent {
         docker {
             image 'node:10'
             args '-p 3000:3000'
         }
+    }
 
     stages {
-        stage('Build') {
+        stage('lint test') {
             steps {
                 sh 'npm install'
                 sh 'npm run lint'
@@ -14,7 +20,7 @@ pipeline {
                 fileExists 'Dockerfile'
             }
         }
-        stage('Test10') {
+        stage('Test_node10') {
             steps {
             sh 'node ./src/ &'
             sh 'npm test'
@@ -30,9 +36,7 @@ pipeline {
         }
         }
     }
-    environment {
-        CI = 'true'
-    }
+
 
     post {
             // always {
