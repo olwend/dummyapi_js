@@ -17,22 +17,7 @@ pipeline {
     }
 
     stages {
-        stage('lint test') {
-                agent {
-                    docker {
-                        image 'node:10'
-                        args '-p 3000:3000'
-                        }
-                    }
 
-            steps {
-                sh 'node --version'
-                sh 'npm install'
-                sh 'npm run lint'
-                
-                fileExists 'Dockerfile'
-            }
-        }
 
         // stage( 'build app') {
 
@@ -46,21 +31,37 @@ pipeline {
         //     }
         // }
 
-        stage('Test_node10') {
+        stage('Build & run image') {
             agent { dockerfile true }
             steps {
+                echo 'Built image'
                 // sh 'docker run -p 3001:3001 dummyapi'
                 // /sh 'node ./src/ &'
+            }
+        }
+
+        stage('lint & test') {
+            agent {
+                docker {
+                    image 'node:10'
+                    args '-p 3000:3000'
+                    }
+                }
+
+            steps {
+                sh 'node --version'
+                sh 'npm install'
+                sh 'npm run lint'
                 sh 'npm test'
                 sh 'mv ./index.html ./coverage.html'
-                publishHTML target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'lint.html, coverage.html, tests.html',
-                reportName: 'Coverage Report'
-                ]
+                    publishHTML target: [
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'lint.html, coverage.html, tests.html',
+                    reportName: 'Coverage Report'
+                    ]
             }
         }
     }
