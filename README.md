@@ -42,9 +42,10 @@ docker run \
 -v jenkins-data:/var/jenkins_home \ 
 -v /var/run/docker.sock:/var/run/docker.sock  \
 -v "$HOME":/home \
-jenkinsci/blueocean 
+jenkinsci/blueocean
 ```
-Enhancement:  docker-compose.yml
+
+# Enhancement:  docker-compose.yml
 
  ```docker-compose up``` follow up with ```docker-compose down``` to clean up
 
