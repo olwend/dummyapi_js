@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm install
 
 # bundle app source
-COPY . .
+COPY ./src ./src
 
 # set up a healthcheck
 HEALTHCHECK --interval=5s \

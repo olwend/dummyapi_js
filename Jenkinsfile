@@ -10,6 +10,9 @@ pipeline {
             args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
             }
         }
+    options {
+        {timestamps()}
+    }
 
 
     stages {
@@ -22,21 +25,22 @@ pipeline {
             }
         }
 
-        stage( 'build app') {
+        // stage( 'build app') {
 
-            steps {
-                script{
-                    app = docker.build("dummyapi:${env.BUILD_ID}")
-                }
+        //     steps {
+        //         script{
+        //             app = docker.build("dummyapi:${env.BUILD_ID}")
+        //         }
             
                 
-                // sh 'node ./src/ &'
-            }
-        }
+        //         // sh 'node ./src/ &'
+        //     }
+        // }
 
         stage('Test_node10') {
             steps {
-                sh 'docker run -p 3001:3001 dummyapi'
+                // sh 'docker run -p 3001:3001 dummyapi'
+                sh 'node ./src/ &'
                 sh 'npm test'
                 sh 'mv ./index.html ./coverage.html'
                 publishHTML target: [
@@ -52,12 +56,12 @@ pipeline {
     }
 
     post {
-        // always {
-        //     echo 'This has finished so I am cleaning workspace'
-        //     deleteDir() /* clean up our workspace */
-        // }
+        always {
+            echo 'This has finished so I am cleaning workspace'
+            deleteDir() /* clean up our workspace */
+        }
         success {
-            echo 'I succeeded!'
+            echo 'I succeeded! :-) :-) :-)'
 
         }
         unstable {
@@ -67,7 +71,7 @@ pipeline {
             echo 'I failed :('
         }
         fixed {
-            echo 'Things have improved on previous run...'
+            echo 'Things have improved on previous run... :-)'
         }
     }
 }
