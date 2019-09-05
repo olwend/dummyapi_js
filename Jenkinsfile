@@ -44,7 +44,7 @@ pipeline {
                     ]
             }
         }
-    }
+
 
 // This builds/tags image via dockerfile
         stage('Build image') {
@@ -54,6 +54,7 @@ pipeline {
                 echo 'Built image is tagged :latest'
             }
         }
+    }
 
 // pick up latest tagged image and push to dockerhub
         // stage() {
