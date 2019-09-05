@@ -18,14 +18,8 @@ pipeline {
 
     stages {
 
-        stage('Build & run image') {
-            agent { dockerfile true }
-            steps {
-                echo 'Built image'
-            }
-        }
-
-        stage('lint & test') {
+// via docker node  - run app and tests
+        stage('lint and run jest tests') {
             agent {
                 docker {
                     image 'node:10'
@@ -52,6 +46,22 @@ pipeline {
         }
     }
 
+// This builds/tags image via dockerfile
+        stage('Build image') {
+            agent { dockerfile true }
+            steps {
+                sh 'docker --version'
+                echo 'Built image is tagged :latest'
+            }
+        }
+
+// pick up latest tagged image and push to dockerhub
+        // stage() {
+            //  steps {
+            //      sh 'docker run -it -p 3001:3001  -d dummyapi'
+            //      }
+            //  }   
+        // }
     post {
     
         always {
