@@ -57,10 +57,10 @@ app.delete('/:id', async (req, res) => {
 });
 
 //PUT 
-app.put('/:id', async (req, res) => {
-    await updateFd(req.params.id, req.body);
-    res.send({ message: 'Fitness device updated'}); 
-});
+// app.put('/:id', async (req, res) => {
+//     await updateFd(req.params.id, req.body);
+//     res.send({ message: 'Fitness device updated'}); 
+// });
 
 //start the server
 app.listen(3001, async () => {

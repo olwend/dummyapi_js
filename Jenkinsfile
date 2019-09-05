@@ -18,25 +18,10 @@ pipeline {
 
     stages {
 
-
-        // stage( 'build app') {
-
-        //     steps {
-        //         script{
-        //             app = docker.build("dummyapi:${env.BUILD_ID}")
-        //         }
-            
-                
-        //         // sh 'node ./src/ &'
-        //     }
-        // }
-
         stage('Build & run image') {
             agent { dockerfile true }
             steps {
                 echo 'Built image'
-                // sh 'docker run -p 3001:3001 dummyapi'
-                // /sh 'node ./src/ &'
             }
         }
 
