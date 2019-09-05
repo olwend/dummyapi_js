@@ -60,7 +60,7 @@ pipeline {
                 //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
                 //          app.push("latest")
                 //      }
-                 }
+                //  }
             }
         }   
     }
