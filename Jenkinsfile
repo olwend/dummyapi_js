@@ -52,26 +52,27 @@ pipeline {
                 sh 'node --version'
                 sh 'npm install'
                 sh 'npm run lint'
-                // sh 'npm test'
-                // sh 'mv ./index.html ./coverage.html'
-                //     publishHTML target: [
-                //     allowMissing: true,
-                //     alwaysLinkToLastBuild: false,
-                //     keepAll: true,
-                //     reportDir: '.',
-                //     reportFiles: 'lint.html, coverage.html, tests.html',
-                //     reportName: 'Coverage Report'
-                //     ]
+                sh 'node ./src/ &'
+                sh 'npm test'
+                sh 'mv ./index.html ./coverage.html'
+                    publishHTML target: [
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'lint.html, coverage.html, tests.html',
+                    reportName: 'Coverage Report'
+                    ]
             }
         }
     }
 
     post {
     
-        always {
-            echo 'This has finished so I am cleaning workspace'
-            deleteDir() /* clean up our workspace */
-        }
+        // always {
+        //     echo 'This has finished so I am cleaning workspace'
+        //     deleteDir() /* clean up our workspace */
+        // }
         success {
             echo 'I succeeded! :-) :-) :-)'
 
