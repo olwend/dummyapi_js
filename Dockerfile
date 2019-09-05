@@ -14,17 +14,18 @@ RUN npm install
 # bundle app source
 COPY ./src ./src
 
-# set up a healthcheck
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD ["npm t"]|| ["exit 1", "echo fail"]
-            # curl -f http://127.0.0.1:8000 || exit 1
-
 # app binds to port 3001 accessed by docker daemon
 EXPOSE 3001
 
 # define runtime
 CMD [ "node", "/app/src"]
+
+# set up a healthcheck
+HEALTHCHECK --interval=5s \
+            --timeout=5s \
+            CMD ["npm t", "echo testing"]|| ["exit 1", "echo fail"]
+            # curl -f http://127.0.0.1:8000 || exit 1
+
 
 
 
