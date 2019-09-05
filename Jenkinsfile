@@ -1,5 +1,10 @@
 pipeline {
 
+    environment {
+        registry = "olwend/dummyapi"
+        registryCredential = 'dockerhub'
+  }
+
     agent any
     
     environment {
@@ -50,10 +55,11 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 script {
-                     docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
-                         app.push("latest")
-                     }
+                 sh 'docker push olwend/dummyapi'
+                //  script {
+                //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
+                //          app.push("latest")
+                //      }
                  }
             }
         }   
