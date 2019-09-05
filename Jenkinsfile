@@ -52,7 +52,7 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 sh 'docker push olwend/dummyapi'
+                 sh 'docker push ba013168a1585532da837d680215ab850d395472:latest'
                 //  script {
                 //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
                 //          app.push("latest")
