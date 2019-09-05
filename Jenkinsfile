@@ -3,13 +3,10 @@ pipeline {
     environment {
         registry = "olwend/dummyapi"
         registryCredential = 'dockerhub'
+        CI = 'true'
   }
 
-    agent any
-    
-    environment {
-        CI = 'true'
-    }
+    agent any   
 
     options{
         timestamps()
