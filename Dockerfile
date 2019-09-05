@@ -9,7 +9,7 @@ ENV myDummyAPI="DummyAPI"
 # install dependencies
 COPY package*.json ./
 
-RUN npm t
+RUN npm install
 
 # bundle app source
 COPY ./src ./src
@@ -17,7 +17,8 @@ COPY ./src ./src
 # set up a healthcheck
 HEALTHCHECK --interval=5s \
             --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+            CMD ["npm t"]|| exit 1
+            # curl -f http://127.0.0.1:8000 || exit 1
 
 # app binds to port 3001 accessed by docker daemon
 EXPOSE 3001
