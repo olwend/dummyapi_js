@@ -22,7 +22,6 @@ pipeline {
                 }
 
             steps {
-                sh 'node --version'
                 sh 'npm install'
                 sh 'npm run lint'
                 sh 'node ./src/ &'
@@ -51,11 +50,14 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 sh 'docker --version'
+                 script {
+                     docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
+                         app.push("latest")
+                     }
                  }
-             }   
-        }
-
+            }
+        }   
+    }
 
     post {
     
