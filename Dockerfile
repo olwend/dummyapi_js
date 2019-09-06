@@ -1,5 +1,5 @@
 # use long term support version 10
-FROM node:10
+FROM node:10-alpine
 
 # app directory
 WORKDIR /app
@@ -23,8 +23,7 @@ CMD [ "node", "/app/src"]
 # set up a healthcheck
 HEALTHCHECK --interval=3s \
             --timeout=5s \
-            CMD ["npm t", "echo testing"]|| ["exit 1", "echo fail"]
-            # curl -f http://127.0.0.1:8000 || exit 1
+            curl -f http://127.0.0.1:8000 || exit 1
 
 
 
