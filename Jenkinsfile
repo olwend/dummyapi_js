@@ -46,7 +46,7 @@ pipeline {
                 script {
                     app = docker.build registry + ":$BUILD_NUMBER"
                 }
-                echo 'Built image is ' registry + ":$BUILD_NUMBER"
+                echo 'Built image is olwend/dummyapi'
             }
         }
 
