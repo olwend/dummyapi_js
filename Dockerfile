@@ -23,7 +23,7 @@ CMD [ "node", "/app/src"]
 # set up a healthcheck
 HEALTHCHECK --interval=3s \
             --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+            CMD curl -f http://127.0.0.1:3001 || exit 1
 
 
 

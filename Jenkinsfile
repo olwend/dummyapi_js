@@ -18,7 +18,7 @@ pipeline {
         stage('lint and run jest tests') {
             agent {
                 docker {
-                    image 'node:10'
+                    image 'node:10-alpine'
                     args '-p 3000:3000'
                     }
                 }
@@ -52,8 +52,8 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 sh 'docker tag 3b4d5dc419632babca5c8607beaf4df5ac2af2c1:latest olwend/dummyapi:alpine'
-                 sh 'docker push olwend/dummyapi:alpine'
+                 sh 'docker tag *:latest olwend/dummyapi:latest'
+                 sh 'docker push olwend/dummyapi:latest'
                 //  script {
                 //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
                 //          app.push("latest")
@@ -67,6 +67,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
+            sh 'docker system prune -a'
             deleteDir() /* clean up our workspace */
         }
         success {
