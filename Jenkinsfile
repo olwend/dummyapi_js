@@ -18,7 +18,7 @@ pipeline {
         stage('lint and run jest tests') {
             agent {
                 docker {
-                    image 'node:10-alpine'
+                    image 'node:10'
                     args '-p 3000:3000'
                     }
                 }
@@ -71,7 +71,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
-            sh 'docker system prune -a'
+            // sh 'docker system prune -a'
             deleteDir() /* clean up our workspace */
         }
         success {
