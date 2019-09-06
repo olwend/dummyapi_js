@@ -52,7 +52,7 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 sh 'docker tag ba013168a1585532da837d680215ab850d395472:latest olwend/dummyapi:alpine'
+                 sh 'docker tag 3b4d5dc419632babca5c8607beaf4df5ac2af2c1:latest olwend/dummyapi:alpine'
                  sh 'docker push olwend/dummyapi:alpine'
                 //  script {
                 //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
