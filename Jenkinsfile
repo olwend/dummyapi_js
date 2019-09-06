@@ -43,9 +43,10 @@ pipeline {
 
 // This builds/tags image via dockerfile
         stage('Build image') {
-            agent { dockerfile true }
+            agent { dockerfile 
+                additionalBuildArgs '--build-arg version=1' }
             steps {
-                echo 'Built image is tagged :latest'
+                echo 'Built image is tagged version=1'
             }
         }
 
