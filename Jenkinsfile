@@ -46,7 +46,6 @@ pipeline {
                 script {
                     app = docker.build registry + ":$BUILD_NUMBER"
                 }
-                sh ''
                 echo 'Built image  olwend/dummyapi'
             }
         }
@@ -54,10 +53,8 @@ pipeline {
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                //  sh 'docker push olwend/dummyapi:latest'
-               
                 sh 'docker push olwend/dummyapi:$BUILD_NUMBER'
-                 echo 'Pushing to repository'
+                echo 'Pushing to repository'
             }
         }   
     }
