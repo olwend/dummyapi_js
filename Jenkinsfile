@@ -43,19 +43,21 @@ pipeline {
 
 // This builds/tags image via dockerfile
         stage('Build image') {
-            agent { dockerfile true }
+            // agent { dockerfile true }
             steps {
-                echo 'Built image is tagged version=1'
+                script {
+                    app = docker.build("olwend/dummyapi")
+                }
+                echo 'Built image is olwend/dummyapi'
             }
         }
 
 // pick up latest tagged image and push to dockerhub
         stage('push to docker hub') {
              steps {
-                 sh 'docker tag *:latest olwend/dummyapi:latest'
                  sh 'docker push olwend/dummyapi:latest'
                 //  script {
-                //      docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
+                //      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                 //          app.push("latest")
                 //      }
                 //  }
