@@ -54,7 +54,7 @@ pipeline {
         stage('push to docker hub') {
              steps {
                 //  sh 'docker push olwend/dummyapi:latest'
-                sh 'app.push'
+                sh 'app.push(":$BUILD_NUMBER")'
                  echo 'Pushing to repository'
             }
         }   
@@ -64,7 +64,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
-            sh 'docker rmi olwend/dummyapi'
+            sh 'docker rmi $app'
             deleteDir() /* clean up our workspace */
         }
         success {
