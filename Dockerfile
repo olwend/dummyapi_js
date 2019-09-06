@@ -1,5 +1,5 @@
 # use long term support version 10
-FROM node:10-alpine
+FROM node:10-slim
 
 # app directory
 WORKDIR /app

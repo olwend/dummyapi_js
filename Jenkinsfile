@@ -18,7 +18,7 @@ pipeline {
         stage('lint and run jest tests') {
             agent {
                 docker {
-                    image 'node:10'
+                    image 'node:10-slim'
                     args '-p 3000:3000'
                     }
                 }
@@ -43,14 +43,10 @@ pipeline {
 
 // This builds/tags image via dockerfile
         stage('Build image') {
-            agent { 
-                dockerfile true {
-                    // additionalBuildArgs '--build-arg version=1'
-                }
-            }
+            agent { dockerfile true }
             steps {
                 echo 'Built image is tagged version=1'
-                }
+            }
         }
 
 // pick up latest tagged image and push to dockerhub
