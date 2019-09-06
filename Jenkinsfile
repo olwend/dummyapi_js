@@ -46,7 +46,8 @@ pipeline {
                 script {
                     app = docker.build registry + ":$BUILD_NUMBER"
                 }
-                echo 'Built image is olwend/dummyapi'
+                sh ''
+                echo 'Built image  olwend/dummyapi'
             }
         }
 
@@ -54,7 +55,8 @@ pipeline {
         stage('push to docker hub') {
              steps {
                 //  sh 'docker push olwend/dummyapi:latest'
-                sh 'app.push(":$BUILD_NUMBER")'
+               
+                sh 'docker push olwend/dummyapi:$BUILD_NUMBER'
                  echo 'Pushing to repository'
             }
         }   
@@ -64,7 +66,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
-            sh 'docker rmi $app'
+            sh 'docker rmi olwend/dummyapi:$BUILD_NUMBER'
             deleteDir() /* clean up our workspace */
         }
         success {
