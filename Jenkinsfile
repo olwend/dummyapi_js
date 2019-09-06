@@ -45,7 +45,7 @@ pipeline {
         stage('Build image') {
             agent { 
                 dockerfile true {
-                    additionalBuildArgs '--build-arg version=1'
+                    // additionalBuildArgs '--build-arg version=1'
                 }
             }
             steps {
