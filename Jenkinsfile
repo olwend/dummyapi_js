@@ -44,7 +44,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    app = docker.build("olwend/dummyapi")
+                    app = docker.build("registry + :$BUILD_NUMBER")
                 }
                 echo 'Built image is olwend/dummyapi'
             }
