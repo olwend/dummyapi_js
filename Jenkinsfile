@@ -19,7 +19,6 @@ pipeline {
             agent {
                 docker {
                     image 'node:10-slim'
-                    args '-p 3000:3000'
                     }
                 }
 
@@ -43,7 +42,6 @@ pipeline {
 
 // This builds/tags image via dockerfile
         stage('Build image') {
-            // agent { dockerfile true }
             steps {
                 script {
                     app = docker.build("olwend/dummyapi")
@@ -56,11 +54,7 @@ pipeline {
         stage('push to docker hub') {
              steps {
                  sh 'docker push olwend/dummyapi:latest'
-                //  script {
-                //      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                //          app.push("latest")
-                //      }
-                //  }
+                 echo 'Pushing to repository'
             }
         }   
     }
@@ -69,7 +63,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
-            // sh 'docker system prune -a'
+            sh 'docker rmi olwend/dummyapi'
             deleteDir() /* clean up our workspace */
         }
         success {
