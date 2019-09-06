@@ -9,7 +9,7 @@ ENV myDummyAPI="DummyAPI"
 # install dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 # bundle app source
 COPY ./src ./src
