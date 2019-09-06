@@ -43,10 +43,13 @@ pipeline {
 
 // This builds/tags image via dockerfile
         stage('Build image') {
-            agent { dockerfile 
-                additionalBuildArgs '--build-arg version=1' }
-            steps {
-                echo 'Built image is tagged version=1'
+            agent { 
+                dockerfile{
+                additionalBuildArgs '--build-arg version=1'
+                }
+                steps {
+                    echo 'Built image is tagged version=1'
+                }
             }
         }
 
