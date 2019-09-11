@@ -1,24 +1,26 @@
 # use long term support version 10
-FROM node:10
+FROM node:10-slim
 
 # app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-ENV myCustomEnvVar="This is a sample."
+ENV myDummyAPI="DummyAPI"
 
 # install dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 # bundle app source
-COPY . .
+COPY ./src ./src
 
-# app binds to port 8080 so ma by docker daemon
+# app binds to port 3001 accessed by docker daemon
 EXPOSE 3001
 
 # define runtime
-CMD [ "node", "/usr/src/app/src"]
+CMD [ "node", "/app/src"]
+
+
 
 
 
