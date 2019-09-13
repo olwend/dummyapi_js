@@ -63,7 +63,7 @@ pipeline {
     
         always {
             echo 'This has finished so I am cleaning workspace'
-            sh 'docker rmi olwend/dummyapi:$BUILD_NUMBER'
+            // sh 'docker rmi olwend/dummyapi:$BUILD_NUMBER'
             deleteDir() /* clean up our workspace */
         }
         success {
